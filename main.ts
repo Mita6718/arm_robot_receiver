@@ -13,6 +13,12 @@ function right () {
     pins.analogWritePin(AnalogPin.P16, 1023)
     pins.digitalWritePin(DigitalPin.P15, 1)
 }
+// left motor  = P16, P15
+// right motor = P14, P13
+function armup () {
+    pins.analogWritePin(AnalogPin.P8, 1023)
+    pins.digitalWritePin(DigitalPin.P1, 1)
+}
 radio.onReceivedString(function (sms) {
     if (sms == "open") {
         open_claw()
@@ -45,7 +51,7 @@ radio.onReceivedString(function (sms) {
         backward()
         basic.showIcon(IconNames.Angry)
     } else if (sms == "armup") {
-        liftup()
+        armup()
         basic.showLeds(`
             . . # . .
             . # # # .
@@ -54,7 +60,7 @@ radio.onReceivedString(function (sms) {
             . . # . .
             `)
     } else if (sms == "armdown") {
-        liftdown()
+        armdown()
         basic.showLeds(`
             . . # . .
             . . # . .
@@ -67,11 +73,9 @@ radio.onReceivedString(function (sms) {
         basic.showIcon(IconNames.No)
     }
 })
-// left motor  = P16, P15
-// right motor = P14, P13
-function liftup () {
+function armdown () {
     pins.analogWritePin(AnalogPin.P8, 1023)
-    pins.digitalWritePin(DigitalPin.P1, 1)
+    pins.digitalWritePin(DigitalPin.P1, 0)
 }
 function left () {
     pins.analogWritePin(AnalogPin.P16, 1023)
@@ -96,10 +100,6 @@ function backward () {
     pins.digitalWritePin(DigitalPin.P15, 0)
     pins.analogWritePin(AnalogPin.P16, 1023)
     pins.digitalWritePin(DigitalPin.P15, 0)
-}
-function liftdown () {
-    pins.analogWritePin(AnalogPin.P8, 1023)
-    pins.digitalWritePin(DigitalPin.P1, 0)
 }
 function close_claw () {
     // close hand
