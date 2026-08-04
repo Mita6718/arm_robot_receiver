@@ -1,10 +1,3 @@
-/**
- * Tip
- * 
- * analog = speed
- * 
- * digital = direction
- */
 // Motors (2 wheels)
 function right () {
     // Connector E (P16, P15)
@@ -19,6 +12,15 @@ function armup () {
     pins.analogWritePin(AnalogPin.P8, 1023)
     pins.digitalWritePin(DigitalPin.P1, 1)
 }
+/**
+ * Tip
+ * 
+ * analog = speed
+ * 
+ * digital = direction
+ * 
+ * Change your radio set group
+ */
 radio.onReceivedString(function (sms) {
     if (sms == "open") {
         open_claw()
