@@ -1,0 +1,115 @@
+/**
+ * Tip
+ * 
+ * analog = speed
+ * 
+ * digital = direction
+ */
+// Motors (2 wheels)
+function right () {
+    // Connector E (P16, P15)
+    pins.analogWritePin(AnalogPin.P16, 1023)
+    pins.digitalWritePin(DigitalPin.P15, 0)
+    pins.analogWritePin(AnalogPin.P16, 1023)
+    pins.digitalWritePin(DigitalPin.P15, 1)
+}
+radio.onReceivedString(function (sms) {
+    if (sms == "open") {
+        open_claw()
+        basic.showIcon(IconNames.Square)
+    } else if (sms == "close") {
+        close_claw()
+        basic.showIcon(IconNames.SmallSquare)
+    } else if (sms == "left") {
+        left()
+        basic.showLeds(`
+            . . # . .
+            . # . . .
+            # # # # #
+            . # . . .
+            . . # . .
+            `)
+    } else if (sms == "right") {
+        right()
+        basic.showLeds(`
+            . . # . .
+            . . . # .
+            # # # # #
+            . . . # .
+            . . # . .
+            `)
+    } else if (sms == "forward") {
+        forward()
+        basic.showIcon(IconNames.Happy)
+    } else if (sms == "backward") {
+        backward()
+        basic.showIcon(IconNames.Angry)
+    } else if (sms == "armup") {
+        liftup()
+        basic.showLeds(`
+            . . # . .
+            . # # # .
+            # . # . #
+            . . # . .
+            . . # . .
+            `)
+    } else if (sms == "armdown") {
+        liftdown()
+        basic.showLeds(`
+            . . # . .
+            . . # . .
+            # . # . #
+            . # # # .
+            . . # . .
+            `)
+    } else if (sms == "stop") {
+        stop()
+        basic.showIcon(IconNames.No)
+    }
+})
+// left motor  = P16, P15
+// right motor = P14, P13
+function liftup () {
+    pins.analogWritePin(AnalogPin.P8, 1023)
+    pins.digitalWritePin(DigitalPin.P1, 1)
+}
+function left () {
+    pins.analogWritePin(AnalogPin.P16, 1023)
+    pins.digitalWritePin(DigitalPin.P15, 1)
+    pins.analogWritePin(AnalogPin.P16, 1023)
+    pins.digitalWritePin(DigitalPin.P15, 0)
+}
+function stop () {
+    pins.analogWritePin(AnalogPin.P16, 0)
+    pins.analogWritePin(AnalogPin.P16, 0)
+    pins.analogWritePin(AnalogPin.P8, 0)
+    pins.analogWritePin(AnalogPin.P2, 0)
+}
+function open_claw () {
+    // open hand
+    pins.analogWritePin(AnalogPin.P2, 1023)
+    pins.digitalWritePin(DigitalPin.P12, 1)
+}
+function backward () {
+    // Connector F (P14, P13)
+    pins.analogWritePin(AnalogPin.P16, 1023)
+    pins.digitalWritePin(DigitalPin.P15, 0)
+    pins.analogWritePin(AnalogPin.P16, 1023)
+    pins.digitalWritePin(DigitalPin.P15, 0)
+}
+function liftdown () {
+    pins.analogWritePin(AnalogPin.P8, 1023)
+    pins.digitalWritePin(DigitalPin.P1, 0)
+}
+function close_claw () {
+    // close hand
+    pins.analogWritePin(AnalogPin.P2, 1023)
+    pins.digitalWritePin(DigitalPin.P12, 0)
+}
+function forward () {
+    pins.analogWritePin(AnalogPin.P16, 1023)
+    pins.digitalWritePin(DigitalPin.P15, 1)
+    pins.analogWritePin(AnalogPin.P16, 1023)
+    pins.digitalWritePin(DigitalPin.P15, 1)
+}
+radio.setGroup(61)
