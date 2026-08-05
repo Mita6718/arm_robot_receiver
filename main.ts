@@ -1,10 +1,13 @@
+/**
+ * try to change the number of digital and analog number data because i forgot pin Good luck
+ */
 // Motors (2 wheels)
 function right () {
     // Connector E (P16, P15)
     pins.analogWritePin(AnalogPin.P16, 1023)
     pins.digitalWritePin(DigitalPin.P15, 0)
-    pins.analogWritePin(AnalogPin.P16, 1023)
-    pins.digitalWritePin(DigitalPin.P15, 1)
+    pins.analogWritePin(AnalogPin.P14, 1023)
+    pins.digitalWritePin(DigitalPin.P13, 0)
 }
 // left motor  = P16, P15
 // right motor = P14, P13
@@ -12,15 +15,13 @@ function armup () {
     pins.analogWritePin(AnalogPin.P8, 1023)
     pins.digitalWritePin(DigitalPin.P1, 1)
 }
-/**
- * Tip
- * 
- * analog = speed
- * 
- * digital = direction
- * 
- * Change your radio set group
- */
+// Tip
+// 
+// analog = speed
+// 
+// digital = direction
+// 
+// Change your radio set group
 radio.onReceivedString(function (sms) {
     if (sms == "open") {
         open_claw()
@@ -82,8 +83,8 @@ function armdown () {
 function left () {
     pins.analogWritePin(AnalogPin.P16, 1023)
     pins.digitalWritePin(DigitalPin.P15, 1)
-    pins.analogWritePin(AnalogPin.P16, 1023)
-    pins.digitalWritePin(DigitalPin.P15, 0)
+    pins.analogWritePin(AnalogPin.P14, 1023)
+    pins.digitalWritePin(DigitalPin.P13, 1)
 }
 function stop () {
     pins.analogWritePin(AnalogPin.P16, 0)
@@ -99,9 +100,9 @@ function open_claw () {
 function backward () {
     // Connector F (P14, P13)
     pins.analogWritePin(AnalogPin.P16, 1023)
-    pins.digitalWritePin(DigitalPin.P15, 0)
-    pins.analogWritePin(AnalogPin.P16, 1023)
-    pins.digitalWritePin(DigitalPin.P15, 0)
+    pins.digitalWritePin(DigitalPin.P15, 1)
+    pins.analogWritePin(AnalogPin.P14, 1023)
+    pins.digitalWritePin(DigitalPin.P13, 0)
 }
 function close_claw () {
     // close hand
@@ -110,8 +111,8 @@ function close_claw () {
 }
 function forward () {
     pins.analogWritePin(AnalogPin.P16, 1023)
-    pins.digitalWritePin(DigitalPin.P15, 1)
-    pins.analogWritePin(AnalogPin.P16, 1023)
-    pins.digitalWritePin(DigitalPin.P15, 1)
+    pins.digitalWritePin(DigitalPin.P15, 0)
+    pins.analogWritePin(AnalogPin.P14, 1023)
+    pins.digitalWritePin(DigitalPin.P13, 1)
 }
 radio.setGroup(61)
