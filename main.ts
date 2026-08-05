@@ -1,5 +1,5 @@
 /**
- * try to change the number of digital and analog number data because i forgot pin Good luck
+ * Try To Change direction(AnalogPin, DigitalPin) Upload Code to robot and test direction if it not correct direction change the numbrt set in pins like 1, 0 it digital it control direction
  */
 // Motors (2 wheels)
 function right () {
